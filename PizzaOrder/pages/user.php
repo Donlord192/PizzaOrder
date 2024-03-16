@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-if (isset($_GET['logout'])) {
-    session_destroy();
-    header("Location: /pizzaorder/index.php");
-    exit();
-}
-
 if (!isset($_SESSION['username'])) {
     header("Location: /pizzaorder/index.php");
     exit();
@@ -119,14 +113,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete_account'])) {
 <div id="user-content">
     <h2>Добро пожаловать, <?php echo $_SESSION['username']; ?>!</h2>
 
-    <form action="user.php" method="post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
         <button type="submit" name="delete_account" onclick="return confirm('Вы уверены, что хотите удалить свой аккаунт?')">Удалить аккаунт</button>
     </form>
 
     <?php
     if (isset($_SESSION['username'])) {
-        echo '<a href="/pizzaorder/index.php">Выйти из аккаунта</a>';
-        session_destroy();
+        echo '<a href="/pizzaorder/index.php?logout=1">Выйти из аккаунта</a>';               
     }
     ?>
 </div>

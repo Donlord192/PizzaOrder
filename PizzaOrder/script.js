@@ -123,7 +123,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const response = JSON.parse(xhr.responseText);
                 if (response.message) {
                     alert(response.message);
-                    document.getElementById("cart-items").innerHTML = "";                                   
+                    document.getElementById("cart-items").innerHTML = "";  
+                    totalPriceElement.textContent = `Итого: $0.00`;                                 
                 } else if (response.error) {
                     alert(response.error);
                 }

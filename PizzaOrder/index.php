@@ -1,5 +1,10 @@
 <?php
 session_start();
+if ($_GET['logout']==1) {
+    session_destroy();
+    header("Location: /pizzaorder/index.php");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,8 +24,6 @@ session_start();
             <?php include 'pizza.php'; ?>
         </section>
         <?php
-     session_start();
-
         if (isset($_SESSION['username'])) {
     echo '<a href="/pizzaorder/pages/user.php" class="login-button">' . $_SESSION['username'] . '</a>';
         } else {
